@@ -10,7 +10,7 @@ export class BasketSingleton implements AddProductObserver {
         this.products = []
     }
 
-    static getInstance() {
+    static getInstance(): BasketSingleton {
         if (!BasketSingleton.instance) {
             BasketSingleton.instance = new BasketSingleton()
         }
@@ -18,13 +18,13 @@ export class BasketSingleton implements AddProductObserver {
         return BasketSingleton.instance
     }
 
-    getTotal() {
-        return this.products.reduce((acc: number, nextProduct: Product) => {
+    getTotal(): number {
+        return this.products.reduce((acc: number, nextProduct: Product): number => {
             return acc + nextProduct.price
         }, 0)
     }
 
-    update(event: AddProductEvent) {
+    update(event: AddProductEvent): void {
         console.log('Produto adicionado: ', event.product.name)
         this.products.push(event.product)
     }
